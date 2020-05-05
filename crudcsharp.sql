@@ -1,0 +1,39 @@
+CREATE DATABASE crudcsharp;
+
+USE crudcsharp;
+
+CREATE TABLE alunos (
+id INT(11) NOT NULL AUTO_INCREMENT,
+nome VARCHAR(80) DEFAULT NULL,
+email VARCHAR(60) DEFAULT NULL,
+idade VARCHAR(60) DEFAULT NULL,
+foto LONGTEXT,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE usuarios(
+id INT(11) NOT NULL AUTO_INCREMENT,
+login VARCHAR(10) DEFAULT NULL,
+senha VARCHAR(10) DEFAULT NULL,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE disciplina (
+coddisc INT(11) NOT NULL AUTO_INCREMENT,
+nomedisc VARCHAR(50) DEFAULT NULL,
+codaluno INT(11) DEFAULT NULL,
+mencao VARCHAR(2) DEFAULT NULL,
+PRIMARY KEY (coddisc),
+KEY FK_disciplina (codaluno),
+CONSTRAINT FK_disciplina FOREIGN KEY (codaluno)
+REFERENCES alunos (id)
+);
+
+ALTER TABLE crudcsharp.disciplina ADD CONSTRAINT fk1
+FOREIGN KEY (codaluno) REFERENCES crudcsharp.alunos(id)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+INSERT INTO usuarios
+(id,login,senha)
+VALUES
+(1,"etec",1234);
